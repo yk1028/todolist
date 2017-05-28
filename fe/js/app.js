@@ -6,12 +6,12 @@
 
     //create new todo
     $(".new-todo").on( "keydown", function( event ) {
-        var context = $(this).val();
-        if(event.which == 13 && context != ""){
+        var todo = $(this).val();
+        if(event.which == 13 && todo != ""){
             $.ajax({
                 url: "/api/todos",
                 type: 'POST',
-                data: {"context" : context},
+                data: {"Todo" : todo},
                 success: function(responce){
                     console.log("please");
                 }

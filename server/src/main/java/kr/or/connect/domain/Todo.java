@@ -2,13 +2,19 @@ package kr.or.connect.domain;
 
 public class Todo {
 	private Integer id;
-	private String context;
+	private String todo;
 	private Integer completed; //active:0 , completed:1
 	
 	public Todo(){}
 	
-	public Todo(String context, Integer completed) {
-		this.context = context;
+	public Todo(String todo, Integer completed) {
+		this.todo = todo;
+		this.completed = completed;
+	}
+	
+	public Todo(Integer id,String todo, Integer completed) {
+		this.id = id;
+		this.todo = todo;
 		this.completed = completed;
 	}
 	
@@ -18,11 +24,11 @@ public class Todo {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getContext() {
-		return context;
+	public String getTodo() {
+		return todo;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setTodo(String todo) {
+		this.todo = todo;
 	}
 	public Integer getCompleted() {
 		return completed;
@@ -33,6 +39,6 @@ public class Todo {
 	
 	@Override
 	public String toString() {
-		return "Todo [id=" + id + ", context=" + context + ", completed=" + completed + "]";
+		return "Todo [id=" + id + ", todo=" + todo + ", completed=" + completed + "]";
 	}
 }

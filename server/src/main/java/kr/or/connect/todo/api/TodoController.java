@@ -1,9 +1,13 @@
 package kr.or.connect.todo.api;
 
+import java.util.Collection;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,16 @@ public class TodoController {
 	@Autowired
 	public TodoController(TodoService service) {
 		this.service = service;
+	}
+	
+	@GetMapping
+	Collection<Todo> readList() {
+		return service.findAll();
+	}
+	
+	@GetMapping("/{id}")
+	Todo read(@PathVariable  Integer id) {
+		return service.findById(id);
 	}
 	
 	@PostMapping
