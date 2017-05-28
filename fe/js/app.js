@@ -10,10 +10,10 @@
         if(event.which == 13 && context != ""){
             $.ajax({
                 url: "/api/todos",
-                type: 'GET',
+                type: 'POST',
                 data: {"context" : context},
                 success: function(responce){
-
+                    console.log("please");
                 }
 
             })
