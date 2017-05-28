@@ -5,6 +5,13 @@ public class Todo {
 	private String context;
 	private Integer completed; //active:0 , completed:1
 	
+	public Todo(){}
+	
+	public Todo(String context, Integer completed) {
+		this.context = context;
+		this.completed = completed;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

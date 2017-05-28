@@ -27,9 +27,7 @@ public class TodoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	Todo create(@RequestBody Todo todo) {
-		Todo newTodo = service.create(todo);
-		log.info("book created : {}" , todo);
-		return todo;
+		return service.create(todo);
 	}
 	
 }
