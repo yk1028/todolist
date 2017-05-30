@@ -40,7 +40,8 @@ public class TodoController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	Todo create(@RequestBody Todo todo) {
+	Todo create(@RequestBody String str) {
+		Todo todo = new Todo(str);
 		return service.create(todo);
 	}
 	

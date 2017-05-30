@@ -7,9 +7,8 @@ public class Todo {
 	
 	public Todo(){}
 	
-	public Todo(String todo, Integer completed) {
+	public Todo(String todo) {
 		this.todo = todo;
-		this.completed = completed;
 	}
 	
 	public Todo(Integer id,String todo, Integer completed) {

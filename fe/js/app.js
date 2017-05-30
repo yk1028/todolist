@@ -8,12 +8,13 @@
     $(".new-todo").on( "keydown", function( event ) {
         var todo = $(this).val();
         if(event.which == 13 && todo != ""){
+            console.log(todo);
             $.ajax({
                 url: "/api/todos",
                 type: 'POST',
-                data: {"Todo" : todo},
+                data: todo,
                 success: function(responce){
-                    console.log("please");
+                    console.log(responce);
                 }
 
             })

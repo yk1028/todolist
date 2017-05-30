@@ -36,7 +36,7 @@ public class TodoDaoTest {
 	@Test
 	public void shouldInsert() {
 		// given
-		Todo todo = new Todo("할 일이 많다", 0);
+		Todo todo = new Todo("할 일이 많다");
 
 		// when
 		Integer id = dao.insert(todo);

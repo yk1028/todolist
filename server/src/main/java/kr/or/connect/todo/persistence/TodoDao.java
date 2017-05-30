@@ -30,7 +30,7 @@ public class TodoDao {
 		this.insertAction = new SimpleJdbcInsert(dataSource)
 				.withTableName("todo")
 				.usingGeneratedKeyColumns("id")
-				.usingColumns("todo","completed");
+				.usingColumns("todo");
 	}
 	
 
