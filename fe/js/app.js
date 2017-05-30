@@ -1,6 +1,6 @@
 (function (window) {
 	'use strict';
-    var list = $(".todo-list");
+    var todolist = $(".todo-list");
 
 	// Your starting point. Enjoy the ride!
 
@@ -14,7 +14,17 @@
                 type: 'POST',
                 data: todo,
                 success: function(responce){
-                    console.log(responce);
+                    console.log(responce.todo);
+                    todolist.prepend(
+                        '<li>'+
+                        '<div class="view">' +
+                        '<input class="toggle" type="checkbox">'+
+                        '<label>'+responce.todo+'</label>'+
+                        '<button class="destroy"></button>'+
+                        '</div>'+
+                        '<input class="edit" value="...">'+
+                        '</li>'
+                        );
                 }
 
             })
