@@ -1,7 +1,5 @@
 package kr.or.connect.todo.persistence;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -51,10 +49,8 @@ public class TodoDao {
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
 	
-	public int update(Integer id,Integer completed) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("id", id);
-		params.put("completed", completed);
+	public int update(Todo todo) {
+		SqlParameterSource params = new BeanPropertySqlParameterSource(todo);
 		return jdbc.update(TodoSqls.UPDATE, params);
 	}
 }

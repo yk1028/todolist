@@ -30,8 +30,8 @@ public class TodoService {
 		return todo;
 	}
 	
-	public boolean update(Integer id, Integer completed){
-		int affected = dao.update(id,completed);
+	public boolean update(Todo todo){
+		int affected = dao.update(todo);
 		return affected == 1;
 	}
 }

@@ -51,10 +51,9 @@ public class TodoController {
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	void update(@PathVariable  Integer id, @RequestBody String completed){
-		log.info(completed);
-		Integer comp = Integer.parseInt(completed);
-		service.update(id, comp);
+	void update(@PathVariable  Integer id, @RequestBody Todo todo){
+		todo.setId(id);
+		service.update(todo);
 	}
 	
 }
