@@ -9,4 +9,8 @@ public class TodoSqls {
 			"SELECT id, todo, completed FROM todo where id = :id";
 	static final String INSERT = 
 			"INSERT INTO todo(TODO, COMPLETED) VALUE(:todo,:completed)";
+	static final String UPDATE =
+			"UPDATE todo SET\n"
+			+ "completed = :completed\n"
+			+ "WHERE id = :id";
 }

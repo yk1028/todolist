@@ -2,6 +2,8 @@ package kr.or.connect.todo.api;
 
 import java.util.Collection;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -44,6 +47,14 @@ public class TodoController {
 		log.info(str);
 		Todo todo = new Todo(str);
 		return service.create(todo);
+	}
+	
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	void update(@PathVariable  Integer id, @RequestBody String completed){
+		log.info(completed);
+		Integer comp = Integer.parseInt(completed);
+		service.update(id, comp);
 	}
 	
 }

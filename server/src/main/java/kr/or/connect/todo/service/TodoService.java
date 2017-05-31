@@ -29,4 +29,9 @@ public class TodoService {
 		todo.setCompleted(0);
 		return todo;
 	}
+	
+	public boolean update(Integer id, Integer completed){
+		int affected = dao.update(id,completed);
+		return affected == 1;
+	}
 }

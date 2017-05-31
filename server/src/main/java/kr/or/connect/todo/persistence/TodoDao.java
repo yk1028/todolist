@@ -50,5 +50,12 @@ public class TodoDao {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todo);
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
+	
+	public int update(Integer id,Integer completed) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		params.put("completed", completed);
+		return jdbc.update(TodoSqls.UPDATE, params);
+	}
 }
 
