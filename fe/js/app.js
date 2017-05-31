@@ -3,12 +3,31 @@
     var todolist = $(".todo-list");
 
 	// Your starting point. Enjoy the ride!
+    //road todolist
+    $.ajax({
+                url: "/api/todos",
+                type: 'GET',
+                success: function(responce){
+                    $.each(responce, function(index, value) {
+                        todolist.prepend(
+                        '<li>'+
+                        '<div class="view">' +
+                        '<input class="toggle" type="checkbox">'+
+                        '<label>'+value.todo+'</label>'+
+                        '<button class="destroy"></button>'+
+                        '</div>'+
+                        '<input class="edit" value="...">'+
+                        '</li>'
+                        );
+                    });
+                }
+            })
+
 
     //create new todo
     $(".new-todo").on( "keydown", function( event ) {
         var todo = $(this).val();
         if(event.which == 13 && todo != ""){
-            console.log(todo);
             $.ajax({
                 url: "/api/todos",
                 type: 'POST',
@@ -25,11 +44,14 @@
                         '<input class="edit" value="...">'+
                         '</li>'
                         );
+                    $(".new-todo").val('');
                 }
 
             })
         }
     });
+
+
 
 })(window);
 

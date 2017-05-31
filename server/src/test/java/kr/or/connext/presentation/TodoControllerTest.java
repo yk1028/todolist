@@ -37,7 +37,7 @@ public class TodoControllerTest {
 
 	@Test
 	public void shouldCreate() throws Exception {
-		String requestBody = "{\"context\":\"hihihi\", \"completed\":0}";
+		String requestBody = "hihihi";
 
 		mvc.perform(
 			post("/api/todos/")
@@ -46,7 +46,7 @@ public class TodoControllerTest {
 			)
 			.andExpect(status().isCreated())
 			.andExpect(jsonPath("$.id").exists())
-			.andExpect(jsonPath("$.context").value("hihihi"))
+			.andExpect(jsonPath("$.todo").value("hihihi"))
 			.andExpect(jsonPath("$.completed").value(0));
 	}
 

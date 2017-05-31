@@ -18,7 +18,7 @@ import kr.or.connect.domain.Todo;
 import kr.or.connect.todo.service.TodoService;
 
 @RestController
-@RequestMapping("/api/todos")
+@RequestMapping(value ="/api/todos")
 public class TodoController {
 	private final TodoService service;
 	private final Logger log = LoggerFactory.getLogger(TodoController.class);
@@ -41,6 +41,7 @@ public class TodoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	Todo create(@RequestBody String str) {
+		log.info(str);
 		Todo todo = new Todo(str);
 		return service.create(todo);
 	}
