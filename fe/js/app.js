@@ -20,9 +20,8 @@
                         '</li>'
                         );
                     });
-                }
-            })
-
+            }
+    })
 
     //create new todo
     $(".new-todo").on( "keydown", function( event ) {
@@ -49,9 +48,19 @@
 
             })
         }
-    });
+    })
 
+    //completed todo
+    $(document).on('click','.toggle',(function(){
+            if ($(this).prop("checked")) {
+                $(this).parent().parent().addClass("completed");
+            }else{
+                $(this).parent().parent().removeClass("completed");
+            }
+        })
+    )
 
 
 })(window);
+
 

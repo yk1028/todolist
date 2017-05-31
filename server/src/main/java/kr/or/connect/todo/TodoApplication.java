@@ -14,8 +14,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "kr.or.connect.presentation")
-@ComponentScan(basePackages = "kr.or.connect.service")
+@ComponentScan(basePackages = "kr.or.connect.todo.service")
+@ComponentScan(basePackages = "kr.or.connect.todo.api")
 public class TodoApplication extends WebMvcConfigurerAdapter {
 	public static void main(String[] args) {
 		SpringApplication.run(TodoApplication.class, args);
