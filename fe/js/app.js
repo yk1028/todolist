@@ -129,12 +129,73 @@
     }))
 
     //filtering
-
-    $(".filters").children().children().click(function(){
-        if ($(this).hasClass("selected")) {
-        }else{
+    $(".filters").children().children().click(function() {
+        if (!$(this).hasClass("selected")) {
             $(".filters").children().children(".selected").removeClass("selected");
             $(this).addClass("selected");
+            var thisdom = $(this);
+            $.ajax({
+            url: "/api/todos",
+            type: 'GET',
+            success: function(responce) {
+                todolist.children().remove();
+                $.each(responce, function(index, value) {
+                    if (thisdom.text() == "All") {
+                        console.log("all");
+                        var tags;
+                        if (value.completed == 1) {
+                            tags = '<li class="completed"' + value.id + '">' +
+                                '<div class="view">' +
+                                '<input class="toggle" type="checkbox" checked>';
+                        } else {
+                            tags = '<li id="' + value.id + '">' +
+                                '<div class="view">' +
+                                '<input class="toggle" type="checkbox">';
+                        }
+                        todolist.prepend(
+                            tags +
+                            '<label>' + value.todo + '</label>' +
+                            '<button class="destroy"></button>' +
+                            '</div>' +
+                            '<input class="edit" value="...">' +
+                            '</li>'
+                        );
+                    }
+                    else if (thisdom.text() == "Active") {
+                        console.log("active");
+                        if (value.completed == 0) {
+                            var tags = '<li id="' + value.id + '">' +
+                                '<div class="view">' +
+                                '<input class="toggle" type="checkbox">';
+                            todolist.prepend(
+                                tags +
+                                '<label>' + value.todo + '</label>' +
+                                '<button class="destroy"></button>' +
+                                '</div>' +
+                                '<input class="edit" value="...">' +
+                                '</li>'
+                            );
+                        }
+                    } else if (thisdom.text() == "Completed") {
+                        console.log("completed");
+                        if (value.completed == 1) {
+                            var tags = '<li class="completed"' + value.id + '">' +
+                                '<div class="view">' +
+                                '<input class="toggle" type="checkbox" checked>';
+                            todolist.prepend(
+                                tags +
+                                '<label>' + value.todo + '</label>' +
+                                '<button class="destroy"></button>' +
+                                '</div>' +
+                                '<input class="edit" value="...">' +
+                                '</li>'
+                            );
+                        }
+                    }
+                });
+            }
+        })
+
         }
     })
 
