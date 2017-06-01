@@ -16,34 +16,37 @@
     }
 
     //road todolist
-    $.ajax({
-        url: "/api/todos",
-        type: 'GET',
-        success: function(responce) {
-            $.each(responce, function(index, value) {
-                var tags;
-                if (value.completed == 1) {
-                    tags = '<li class="completed"' + value.id + '">' +
-                        '<div class="view">' +
-                        '<input class="toggle" type="checkbox" checked>';
-                } else {
-                    tags = '<li id="' + value.id + '">' +
-                        '<div class="view">' +
-                        '<input class="toggle" type="checkbox">';
-                }
-                todolist.prepend(
-                    tags +
-                    '<label>' + value.todo + '</label>' +
-                    '<button class="destroy"></button>' +
-                    '</div>' +
-                    '<input class="edit" value="...">' +
-                    '</li>'
-                );
-            });
-        }
-    })
-    setCountNotComplted();
+    var roadTodolist = function() {
+        $.ajax({
+            url: "/api/todos",
+            type: 'GET',
+            success: function(responce) {
+                $.each(responce, function(index, value) {
+                    var tags;
+                    if (value.completed == 1) {
+                        tags = '<li class="completed"' + value.id + '">' +
+                            '<div class="view">' +
+                            '<input class="toggle" type="checkbox" checked>';
+                    } else {
+                        tags = '<li id="' + value.id + '">' +
+                            '<div class="view">' +
+                            '<input class="toggle" type="checkbox">';
+                    }
+                    todolist.prepend(
+                        tags +
+                        '<label>' + value.todo + '</label>' +
+                        '<button class="destroy"></button>' +
+                        '</div>' +
+                        '<input class="edit" value="...">' +
+                        '</li>'
+                    );
+                });
+            }
+        })
+    }
 
+    roadTodolist();
+    setCountNotComplted();
 
     //create new todo
     $(".new-todo").on("keydown", function(event) {
@@ -135,38 +138,22 @@
             $(this).addClass("selected");
             var thisdom = $(this);
             $.ajax({
-            url: "/api/todos",
-            type: 'GET',
-            success: function(responce) {
-                todolist.children().remove();
-                $.each(responce, function(index, value) {
-                    if (thisdom.text() == "All") {
-                        console.log("all");
-                        var tags;
-                        if (value.completed == 1) {
-                            tags = '<li class="completed"' + value.id + '">' +
-                                '<div class="view">' +
-                                '<input class="toggle" type="checkbox" checked>';
-                        } else {
-                            tags = '<li id="' + value.id + '">' +
-                                '<div class="view">' +
-                                '<input class="toggle" type="checkbox">';
-                        }
-                        todolist.prepend(
-                            tags +
-                            '<label>' + value.todo + '</label>' +
-                            '<button class="destroy"></button>' +
-                            '</div>' +
-                            '<input class="edit" value="...">' +
-                            '</li>'
-                        );
-                    }
-                    else if (thisdom.text() == "Active") {
-                        console.log("active");
-                        if (value.completed == 0) {
-                            var tags = '<li id="' + value.id + '">' +
-                                '<div class="view">' +
-                                '<input class="toggle" type="checkbox">';
+                url: "/api/todos",
+                type: 'GET',
+                success: function(responce) {
+                    todolist.children().remove();
+                    $.each(responce, function(index, value) {
+                        if (thisdom.text() == "All") {
+                            var tags;
+                            if (value.completed == 1) {
+                                tags = '<li class="completed"' + value.id + '">' +
+                                    '<div class="view">' +
+                                    '<input class="toggle" type="checkbox" checked>';
+                            } else {
+                                tags = '<li id="' + value.id + '">' +
+                                    '<div class="view">' +
+                                    '<input class="toggle" type="checkbox">';
+                            }
                             todolist.prepend(
                                 tags +
                                 '<label>' + value.todo + '</label>' +
@@ -175,28 +162,52 @@
                                 '<input class="edit" value="...">' +
                                 '</li>'
                             );
+                        } else if (thisdom.text() == "Active") {
+                            if (value.completed == 0) {
+                                var tags = '<li id="' + value.id + '">' +
+                                    '<div class="view">' +
+                                    '<input class="toggle" type="checkbox">';
+                                todolist.prepend(
+                                    tags +
+                                    '<label>' + value.todo + '</label>' +
+                                    '<button class="destroy"></button>' +
+                                    '</div>' +
+                                    '<input class="edit" value="...">' +
+                                    '</li>'
+                                );
+                            }
+                        } else if (thisdom.text() == "Completed") {
+                            if (value.completed == 1) {
+                                var tags = '<li class="completed"' + value.id + '">' +
+                                    '<div class="view">' +
+                                    '<input class="toggle" type="checkbox" checked>';
+                                todolist.prepend(
+                                    tags +
+                                    '<label>' + value.todo + '</label>' +
+                                    '<button class="destroy"></button>' +
+                                    '</div>' +
+                                    '<input class="edit" value="...">' +
+                                    '</li>'
+                                );
+                            }
                         }
-                    } else if (thisdom.text() == "Completed") {
-                        console.log("completed");
-                        if (value.completed == 1) {
-                            var tags = '<li class="completed"' + value.id + '">' +
-                                '<div class="view">' +
-                                '<input class="toggle" type="checkbox" checked>';
-                            todolist.prepend(
-                                tags +
-                                '<label>' + value.todo + '</label>' +
-                                '<button class="destroy"></button>' +
-                                '</div>' +
-                                '<input class="edit" value="...">' +
-                                '</li>'
-                            );
-                        }
-                    }
-                });
-            }
-        })
+                    });
+                }
+            })
 
         }
+    })
+
+    //delete completed todo
+    $(".clear-completed").click(function() {
+        $.ajax({
+            url: "api/todos/completed",
+            type: 'DELETE',
+            success: function(responce) {
+                todolist.children().remove();
+                roadTodolist();
+            }
+        })
     })
 
 

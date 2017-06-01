@@ -66,5 +66,10 @@ public class TodoController {
 		service.delete(id);
 	}
 	
+	@DeleteMapping("/completed")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	void deleteCompleted() {
+		service.deleteCompleted();
+	}
 	
 }

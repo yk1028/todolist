@@ -63,4 +63,9 @@ public class TodoDao {
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.queryForObject(TodoSqls.COUNT_NOT_COMPLETED, params, Integer.class);
 	}
+	
+	public int deleteCompleted(){
+		Map<String, ?> params = Collections.emptyMap();
+		return jdbc.update(TodoSqls.DELETE_COMPLETED, params);
+	}
 }
