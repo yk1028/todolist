@@ -10,7 +10,7 @@
             url: "api/todos/count",
             type: 'GET',
             success: function(responce) {
-                console.log("성공 count");
+                $(".todo-count").children("strong").text(responce);
             }
         })
     }
@@ -60,7 +60,6 @@
                 data: JSON.stringify(jtodo),
                 dataType: "json",
                 success: function(responce) {
-                    console.log(responce.todo);
                     todolist.prepend(
                         '<li id="' + responce.id + '">' +
                         '<div class="view">' +
@@ -83,10 +82,8 @@
     $(document).on('click', '.toggle', (function() {
         if ($(this).prop("checked")) {
             $(this).parent().parent().addClass("completed");
-            console.log($(this).parent().parent().attr("id"));
             var _url = "api/todos/" + $(this).parent().parent().attr("id");
             var comp = { completed: 1 };
-            console.log(_url);
             $.ajax({
                 url: _url,
                 type: 'PUT',
@@ -94,7 +91,6 @@
                 data: JSON.stringify(comp),
                 dataType: "json",
                 success: function() {
-                    console.log("성공 c1");
                     setCountNotComplted();
                 }
             })
@@ -109,7 +105,6 @@
                 data: JSON.stringify(comp),
                 dataType: "json",
                 success: function() {
-                    console.log("성공 c0");
                     setCountNotComplted();
                 }
             })
@@ -125,7 +120,6 @@
             url: _url,
             type: 'DELETE',
             success: function() {
-                console.log("성공 d");
                 setCountNotComplted();
             }
         })
