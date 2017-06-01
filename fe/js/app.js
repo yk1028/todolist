@@ -24,7 +24,7 @@
                 $.each(responce, function(index, value) {
                     var tags;
                     if (value.completed == 1) {
-                        tags = '<li class="completed"' + value.id + '">' +
+                        tags = '<li id="' + value.id + '" class="completed">' +
                             '<div class="view">' +
                             '<input class="toggle" type="checkbox" checked>';
                     } else {
