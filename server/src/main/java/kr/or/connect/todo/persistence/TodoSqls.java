@@ -13,4 +13,6 @@ public class TodoSqls {
 			"UPDATE todo SET\n"
 			+ "completed = :completed\n"
 			+ "WHERE id = :id";
+	static final String COUNT_NOT_COMPLETED=
+			"SELECT COUNT(*) FROM todo WHERE completed = 0";
 }

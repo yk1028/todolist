@@ -39,4 +39,8 @@ public class TodoService {
 		int affected = dao.deleteById(id);
 		return affected == 1;
 	}
+	
+	public int countNotComplted(){
+		return dao.countTodos();
+	}
 }

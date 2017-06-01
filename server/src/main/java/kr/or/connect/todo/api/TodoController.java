@@ -42,6 +42,11 @@ public class TodoController {
 		return service.findById(id);
 	}
 	
+	@GetMapping("/count")
+	Integer countNotComplted() {
+		return service.countNotComplted();
+	}
+	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	Todo create(@RequestBody Todo todo) {
@@ -60,5 +65,6 @@ public class TodoController {
 	void delete(@PathVariable Integer id) {
 		service.delete(id);
 	}
+	
 	
 }

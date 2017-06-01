@@ -58,4 +58,9 @@ public class TodoDao {
 		Map<String, ?> params = Collections.singletonMap("id", id);
 		return jdbc.update(TodoSqls.DELETE_BY_ID, params);
 	}
+	
+	public int countTodos() {
+		Map<String, Object> params = Collections.emptyMap();
+		return jdbc.queryForObject(TodoSqls.COUNT_NOT_COMPLETED, params, Integer.class);
+	}
 }

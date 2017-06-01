@@ -3,6 +3,16 @@
     var todolist = $(".todo-list");
 
     // Your starting point. Enjoy the ride!
+    // count non-completed todos
+    var setCountNotComplted = function() {
+            $.ajax({
+                url: "api/todos/count",
+                type: 'GET',
+                success: function(responce) {
+                    console.log($(".todo-count").children("strong").text(responce));
+                }
+            })
+        }
     //road todolist
     $.ajax({
         url: "/api/todos",
@@ -31,6 +41,9 @@
         }
     })
 
+    setCountNotComplted();
+
+
     //create new todo
     $(".new-todo").on("keydown", function(event) {
         var todo = $(this).val();
@@ -55,6 +68,7 @@
                         '</li>'
                     );
                     $(".new-todo").val('');
+                    setCountNotComplted();
                 }
 
             })
@@ -77,6 +91,7 @@
                 dataType: "json",
                 success: function() {
                     console.log("성공 c1");
+                    setCountNotComplted();
                 }
             })
         } else {
@@ -91,6 +106,7 @@
                 dataType: "json",
                 success: function() {
                     console.log("성공 c0");
+                    setCountNotComplted();
                 }
             })
         }
@@ -106,6 +122,7 @@
             type: 'DELETE',
             success: function() {
                 console.log("성공 d");
+                setCountNotComplted();
             }
         })
     }))
