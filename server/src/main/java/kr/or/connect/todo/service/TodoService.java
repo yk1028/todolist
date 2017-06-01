@@ -34,4 +34,9 @@ public class TodoService {
 		int affected = dao.update(todo);
 		return affected == 1;
 	}
+	
+	public boolean delete(Integer id) {
+		int affected = dao.deleteById(id);
+		return affected == 1;
+	}
 }

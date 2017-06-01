@@ -35,7 +35,7 @@
     $(".new-todo").on("keydown", function(event) {
         var todo = $(this).val();
         if (event.which == 13 && todo != "") {
-            var jtodo ={todo:todo}
+            var jtodo = { todo: todo }
             $.ajax({
                 url: "/api/todos",
                 type: 'POST',
@@ -99,7 +99,15 @@
     //destroy todo
     $(document).on('click', '.destroy', (function() {
         $(this).parent().parent().remove();
+        var _url = "api/todos/" + $(this).parent().parent().attr("id");
         //ajax로 db에서 삭제
+        $.ajax({
+            url: _url,
+            type: 'DELETE',
+            success: function() {
+                console.log("성공 d");
+            }
+        })
     }))
 
 
