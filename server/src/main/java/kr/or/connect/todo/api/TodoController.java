@@ -44,7 +44,7 @@ public class TodoController {
 	
 	@GetMapping("/count")
 	Integer countNotComplted() {
-		return service.countNotComplted();
+		return service.countNotCompleted();
 	}
 	
 	@PostMapping
@@ -55,9 +55,9 @@ public class TodoController {
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	void update(@PathVariable  Integer id, @RequestBody Todo todo){
+	void updateCompleted(@PathVariable  Integer id, @RequestBody Todo todo){
 		todo.setId(id);
-		service.update(todo);
+		service.updateCompleted(todo);
 	}
 	
 	@DeleteMapping("/{id}")

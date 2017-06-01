@@ -24,27 +24,86 @@ public class TodoDaoTest {
 	private TodoDao dao;
 
 	@Autowired
-	public TodoDaoTest(){
+	public TodoDaoTest() {
 	}
-	
+
 	@Test
 	public void shouldSelectAll() {
 		List<Todo> allTodos = dao.selectAll();
 		assertThat(allTodos, is(notNullValue()));
 	}
-	
+
 	@Test
-	public void shouldInsert() {
+	public void shouldInsertAndSelect() {
 		// given
-		Todo todo = new Todo("할 일이 많다");
+		Todo todo = new Todo("test~");
 
 		// when
 		Integer id = dao.insert(todo);
 
 		// then
 		Todo selected = dao.selectById(id);
-		System.out.println(selected);
-		assertThat(selected.getTodo(), is("할 일이 많다"));
+		assertThat(selected.getTodo(), is("test~"));
 	}
 
+	@Test
+	public void shouldUpdateCompleted() {
+		// Given
+		Todo todo = new Todo("test");
+		Integer id = dao.insert(todo);
+
+		// When
+		todo.setId(id);
+		todo.setCompleted(1);
+		int affected = dao.updateCompleted(todo);
+
+		// Then
+		assertThat(affected, is(1));
+		Todo updated = dao.selectById(id);
+		assertThat(updated.getCompleted(), is(1));
+	}
+
+	@Test
+	public void shouldDeleteById() {
+		// given
+		Todo todo = new Todo("test");
+		Integer id = dao.insert(todo);
+
+		// when
+		int affected = dao.deleteById(id);
+
+		// Then
+		assertThat(affected, is(1));
+	}
+
+	@Test
+	public void shouldCountNotCompletedTodos() {
+		// given
+		int count = dao.countNotCompletedTodos();
+		Todo todo = new Todo("test");
+
+		// when
+		dao.insert(todo);
+
+		// Then
+		assertThat(dao.countNotCompletedTodos(), is(count + 1));
+	}
+
+	@Test
+	public void shouldDeleteCompleted() {
+		// given
+		Todo todo = new Todo("test");
+		
+
+		// when
+		Integer id = dao.insert(todo);
+		todo.setId(id);
+		todo.setCompleted(1); //completed 상태로 변경 
+		dao.updateCompleted(todo);
+		dao.deleteCompleted();
+
+		// Then
+		assertThat(dao.countCompletedTodos(), is(0));
+		
+	}
 }

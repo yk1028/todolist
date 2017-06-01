@@ -30,8 +30,8 @@ public class TodoService {
 		return todo;
 	}
 	
-	public boolean update(Todo todo){
-		int affected = dao.update(todo);
+	public boolean updateCompleted(Todo todo){
+		int affected = dao.updateCompleted(todo);
 		return affected == 1;
 	}
 	
@@ -40,12 +40,17 @@ public class TodoService {
 		return affected == 1;
 	}
 	
-	public int countNotComplted(){
-		return dao.countTodos();
+	public int countNotCompleted(){
+		return dao.countNotCompletedTodos();
+	}
+	
+	public int countCompleted(){
+		return dao.countCompletedTodos();
 	}
 	
 	public boolean deleteCompleted(){
+		int count = dao.countCompletedTodos();
 		int affected = dao.deleteCompleted();
-		return affected == 1;
+		return affected == count; //영향 받은것의 개수
 	}
 }

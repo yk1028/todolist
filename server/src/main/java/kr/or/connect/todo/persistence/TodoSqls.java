@@ -15,6 +15,8 @@ public class TodoSqls {
 			+ "WHERE id = :id";
 	static final String COUNT_NOT_COMPLETED=
 			"SELECT COUNT(*) FROM todo WHERE completed = 0";
+	static final String COUNT_COMPLETED=
+			"SELECT COUNT(*) FROM todo WHERE completed = 1";
 	static final String DELETE_COMPLETED=
 			"DELETE FROM todo WHERE completed = 1";
 }

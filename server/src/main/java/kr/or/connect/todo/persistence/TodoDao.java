@@ -49,7 +49,7 @@ public class TodoDao {
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
 	
-	public int update(Todo todo) {
+	public int updateCompleted(Todo todo) {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(todo);
 		return jdbc.update(TodoSqls.UPDATE, params);
 	}
@@ -59,9 +59,14 @@ public class TodoDao {
 		return jdbc.update(TodoSqls.DELETE_BY_ID, params);
 	}
 	
-	public int countTodos() {
+	public int countNotCompletedTodos() {
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.queryForObject(TodoSqls.COUNT_NOT_COMPLETED, params, Integer.class);
+	}
+	
+	public int countCompletedTodos() {
+		Map<String, Object> params = Collections.emptyMap();
+		return jdbc.queryForObject(TodoSqls.COUNT_COMPLETED, params, Integer.class);
 	}
 	
 	public int deleteCompleted(){
