@@ -35,10 +35,13 @@
     $(".new-todo").on("keydown", function(event) {
         var todo = $(this).val();
         if (event.which == 13 && todo != "") {
+            var jtodo ={todo:todo}
             $.ajax({
                 url: "/api/todos",
                 type: 'POST',
-                data: todo,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(jtodo),
+                dataType: "json",
                 success: function(responce) {
                     console.log(responce.todo);
                     todolist.prepend(
