@@ -43,7 +43,7 @@ public class TodoController {
 	}
 	
 	@GetMapping("/count")
-	Integer countNotComplted() {
+	Integer countNotCompleted() {
 		return service.countNotCompleted();
 	}
 	
